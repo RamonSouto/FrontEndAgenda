@@ -1,0 +1,10 @@
+// src/app/(private)/produtos/cor-estampa/layout.tsx
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+    title: "Grade",
+};
+
+export default function LoginLayout({ children }: { children: React.ReactNode }) {
+    return <>{children}</>;
+}
