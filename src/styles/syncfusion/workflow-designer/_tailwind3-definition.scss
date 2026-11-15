@@ -1,0 +1,177 @@
+@use 'definition' as *;
+@use '../base/common/base-variables' as *;
+
+$wf-surface-alt-bg: $content-bg-color;
+$wf-surface-muted-bg: $content-bg-color-hover;
+$wf-text-color: $content-text-color;
+$wf-border-soft-color: $border-light;
+$wf-input-border-color: $border-dark;
+$wf-text-muted-color:$content-text-color-alt1;
+$wf-text-subtle-color:$content-text-color-alt1;
+$wf-light-color:$content-bg-color;
+$wf-canvas-bg: $content-bg-color;
+$wf-help-bg-top: $content-bg-color-alt2;
+$wf-help-code-bg: $content-bg-color-alt3;
+$wf-failed-bg: $danger-light;
+$wf-selection-running-fill: $primary-lighter;
+$wf-node-stroke-width: $border-2;
+$wf-transparent: $transparent;
+$wf-canvas-toolbar-radius: $radius-6;
+$wf-project-name-tile-bg: $content-bg-color;
+$wf-muted-color: $content-text-color-alt1;
+$wf-disabled-color: $icon-color-disabled;
+$wf-hover-bg: $content-bg-color-hover;
+$wf-simulation-entry-selected-bg: $content-bg-color-selected;
+$wf-simulation-entry-status-icon-color-success: $success;
+$wf-simulation-entry-status-icon-color-failed: $danger;
+$wf-simulation-entry-status-icon-color-running: $primary-light;
+$wf-simulation-log-details-pane-bg: $content-bg-color;
+$wf-hover-light-bg: $content-bg-color-hover;
+$wf-error-dark-color: $danger;
+$wf-formatter-body-bg: rgb($white);
+$wf-formatter-body-color: rgb($black);
+$wf-formatter-rendered-color: $content-text-color-alt3;
+$wf-surface-bg: $content-bg-color;
+$wf-formatter-table-bg: $transparent;
+$wf-formatter-table-color: $border-dark;
+$wf-sticky-note-preview-bg: $primary;
+$wf-sticky-note-preview-color: $msg-danger-color;
+$wf-sticky-note-preview-code-bg: $msg-danger-border-color;
+$wf-sticky-note-editor-bg: $content-bg-color;
+$wf-high-contrast-bg: $content-bg-color-alt3;
+$wf-simulation-summary-status-stopped-color: $content-bg-color-alt2;
+$wf-common-scrollbar-color: $content-bg-color-alt2;
+$wf-common-bg: $content-bg-color-alt2;
+$wf-common-bg-alt: $content-bg-color-alt3;
+$wf-simulation-entry-expand-bg: $content-bg-color-alt3;
+$wf-simulation-entry-children-bg: $danger-lighter;
+$wf-brand-dark-color: $primary;
+$wf-label-color: $content-text-color;
+$wf-ai-assist-select-color: $content-text-color;
+$wf-ai-assist-credential-saved-hint-color: $content-text-color;
+$wf-secondary-color: $content-text-color-alt1;
+$wf-pill-color: $icon-color;
+$wf-brand-color: $primary;
+$wf-node-collection-icon-color: $icon-color;
+$wf-node-collection-icon-background: $content-bg-color-alt2;
+
+/* Font Size and Family; */
+$wf-mono-font: $font-family;
+$wf-body-font-alt: $text-xs;
+$wf-step-font: $text-sm;
+$wf-regular-font: $font-weight-normal;
+$wf-medium-font: $font-weight-medium;
+$wf-strong-font: $font-weight-bold;
+$wf-node-icon-font-size: $font-icon-22;
+$wf-project-name-tile-font: $font-icon-14;
+$wf-property-section-expand-font: $font-icon-18;
+$wf-property-pill-font: $text-xs;
+$wf-simulation-log-list-font: $text-xs;
+$wf-simulation-entry-time-font: $text-xxs;
+$wf-font-icon-ten: $font-icon-10;
+$wf-font-icon-twelve: $font-icon-12;
+$wf-execution-details-content-font: $font-family;
+$wf-property-help-trigger-font: $font-weight-normal;
+$wf-property-empty-font: $text-xs;
+$wf-node-collection-title-font: $text-sm;
+$wf-form-input-choice-item-font: $font-weight-normal;
+$wf-empty-canvas-add-font-alt: $font-icon-20;
+$wf-empty-canvas-add-font-secondary: $font-icon-16;
+$wf-formatter-body-font: $font-family;
+$wf-formatter-body-font-alt: $text-xs;
+$wf-formatter-rendered-font: $font-family;
+$wf-formatter-table-font: $font-weight-bolder;
+$wf-ai-question-text-hint-font-alt: 'italic';
+
+$wf-help-code-border: $border-light;
+$wf-failed-border: $border-error;
+$wf-node-radius: $radius-10;
+$wf-canvas-toolbar-border: 1px solid $border;
+$wf-project-name-tile-border: 1px solid $transparent;
+$wf-simulation-log-clear-radius: $radius-4;
+$wf-property-panel-border: 0;
+$wf-property-section-expand-border: 1px solid $border-dark;
+$wf-property-section-expand-radius: $radius-8;
+$wf-property-pill-radius: $radius-9;
+$wf-simulation-log-panel-border: 1px solid $border;
+$wf-simulation-entry-border:$border;
+$wf-simulation-entry-border-alt: $border;
+$wf-hover-border: $primary-lighter;
+$wf-property-field-border: 1px solid $border;
+$wf-property-help-trigger-icon-radius: $border-radius-50p;
+$wf-approval-reviewer-card-border: $border;
+$wf-approval-reviewer-chip-radius: $radius-full;
+$wf-approval-empty-border: 1px dashed $border-dark;
+$wf-form-input-invalid-border: $danger;
+$wf-formatter-body-border-alt: 1px solid $border;
+$wf-sticky-note-preview-radius: $radius-3;
+$wf-sticky-note-editor-border: 1px $transparent;
+$wf-command-palette-border: 1px solid $border-dark;
+$wf-simulation-entry-children-border-alt: 1px solid $border;
+$wf-ai-question-text-input-border: $primary;
+$wf-ai-question-submit-border: 1px solid $primary;
+$wf-ai-error-border : 1px solid $danger-light;
+$wf-control-border: $border-light;
+$wf-ai-assist-select-border: 1px solid $border-light;
+$wf-ai-manual-answer-border: 3px solid $primary;
+
+/* Other visual styles */
+$wf-help-title: $primary;
+$wf-help-body: $content-bg-color-alt2;
+$wf-completed: $success;
+$wf-failed: $danger;
+$wf-node-caption-height: 30px;
+$wf-node-icon-size: $font-icon-32;
+$wf-canvas-toolbar-shadow: $border-dark;
+$wf-property-section-expand-shadow: $border-dark;
+$wf-form-input-invalid-shadow: $danger-dark;
+$wf-command-palette-shadow: $border-dark;
+$wf-ai-question-text-input-shadow: $primary;
+$wf-empty-canvas-add-border: 1px solid $secondary-border-color;
+$wf-empty-canvas-add-bg: $content-bg-color-alt1;
+
+// New
+$wf-execution-state-border-radius: $radius-full;
+
+$wf-simulation-entry-font-size: $text-sm;
+$wf-simulation-entry-font-weight: $font-weight-normal;
+$wf-simulation-entry-icon-size: $font-icon-16;
+$wf-simulation-entry-state-font-weight: $font-weight-medium;
+
+$wf-simulation-entry-hover-bg: $content-bg-color-hover;
+$wf-simulation-entry-hover-border: $border-dark;
+
+$wf-formatter-completed-label-color: $success;
+$wf-step-completed-selected-bg: $success-light;
+
+$wf-step-failed-selected-bg: $danger-light;
+
+$wf-project-name-tile-color: $content-text-color;
+$wf-approval-comment-label-color: $content-text-color-alt2;
+
+$wf-diagram-selector-shadow: $shadow-lg;
+$wf-step-card-radius: 4px;
+
+$wf-property-section-header-bg: $transparent;
+$wf-step-caption-font-size: 14px;
+$wf-step-caption-color: $black;
+$wf-pressed-bg: $content-bg-color-pressed;
+
+$wf-top-app-bar-bg: $content-bg-color-alt1;
+$wf-node-panel-bg: $content-bg-color;
+$wf-property-panel-bg: $content-bg-color;
+$wf-property-panel-sub-section-bg: $content-bg-color-alt1;
+$wf-exection-log-panel-bg: $content-bg-color;
+
+$wf-white-fill: var(--color-sf-wf-primary-background) !default;
+$wf-canvas-neutral: var(--color-sf-wf-primary);
+$wf-step-failed-bg: var(--color-sf-wf-error-background);
+$wf-completed-bg: var(--color-sf-wf-success-background);
+
+$wf-step-completed-border-color: var(--color-sf-wf-success);
+$wf-step-primary-icon-color: var(--color-sf-wf-primary);
+$wf-step-failed-border-color: var(--color-sf-wf-error);
+
+$wf-running-stroke-color: var(--color-sf-wf-primary);
+$wf-formatter-table-header-color: rgb($black);
+$wf-formatter-body-border-color: 1px solid var(--color-sf-wf-border);

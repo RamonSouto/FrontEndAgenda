@@ -19,7 +19,7 @@ import { useMemo } from "react";
 const data = {
     navMenu: [
         {
-            titulo: 'Produto',
+            titulo: 'Produtos',
             url: '#',
             icon: Package,
             isActive: false,
@@ -49,11 +49,11 @@ const data = {
             ]
         },
         {
-            titulo: 'Agendamento',
+            titulo: 'Agendamentos',
             url: '#',
             icon: CalendarClock,
             items: [
-                { title: "Agendamento", icon: CalendarClock, url: "/agendamento" },
+                { title: "Agendamento", icon: CalendarClock, url: "/agendamentos/agendamento" },
                 { title: "Produto Agendado", icon: PackageCheck, url: "/dashboard" },
                 { title: "Foto Agendamento", icon: Image, url: "/dashboard" },
                 { title: "Tipo Agendamento", icon: Image, url: "/agendamento/tipo-agendamento" },

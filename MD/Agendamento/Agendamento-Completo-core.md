@@ -270,7 +270,289 @@ Preciso que se comporte como um engenheiro de software sênior, arquiteto de sof
     ```
 
 * **Endpoints da API AGENDAMENTO ITEM**:
+  * Criar Agendamento Item
+    * **Método HTTP**: POST
+    * **URL**: /api/agendamentos/{id}/itens
+    * **Campos**: id, id_agendamento, id_tipo_agendamento, id_produto_grade, id_produto_servico, des_ajuste_produto, val_preco_servico, val_desconto_servico, ind_status, created_at, updated_at, deleted_at
+    * **Autenticação**: já existe httpClient com token via cookie
+    * **Chaves**: agendamentoItemKeys
+    * **Validação**: schema com os mesmos campos
+    * **Estrutura de dados (enviado)**:
+    ```json
+    {
+      " id_tipo_agendamento" : 2,
+        "id_produto_grade" : 1,
+        "id_produto_servico" : 1,
+        "des_ajuste_produto" : "Descricao primeiro produto",
+        "val_desconto_servico" : 1.5
+    }
+    ```
+    * **Estrutura de dados (resposta)**:
+    ```json
+    {
+        "sucesso": true,
+        "mensagem": "Item adicionado ao agendamento",
+        "dados": {
+            "id": 2,
+            "id_agendamento": 20,
+            "id_tipo_agendamento": 2,
+            "id_produto_grade": 1,
+            "id_produto_servico": 1,
+            "des_ajuste_produto": "Descricao primeiro produto",
+            "val_preco_servico": "100.01",
+            "val_desconto_servico": "1.50",
+            "ind_status": "pendente",
+            "created_at": "2026-11-12T03:55:42.000Z",
+            "updated_at": "2026-11-12T03:55:42.000Z",
+            "deleted_at": null,
+            "num_sku": "BOOD109PPB",
+            "nom_produto": "Cintura alta com colchetes",
+            "des_tipo_ajuste": "Ajuste pc grande 3º"
+        }
+    }
+    ```
+  * Listar Agendamento Item:
+    * **Método HTTP**: GET
+    * **URL**: /api/agendamentos/{id}/itens
+    * **Campos**: id, id_agendamento, id_tipo_agendamento, id_produto_grade, id_produto_servico, des_ajuste_produto, val_preco_servico, val_desconto_servico, ind_status, created_at, updated_at, deleted_at
+    * **Autenticação**: já existe httpClient com token via cookie
+    * **Chaves**: agendamentoItemKeys
+    * **Validação**: schema com os mesmos campos
+    * **Estrutura de dados (resposta)**:
+    ```json
+    {
+        "sucesso": true,
+        "total": 2,
+        "dados": [
+        {
+            "id": 1,
+            "id_agendamento": 20,
+            "id_tipo_agendamento": 2,
+            "id_produto_grade": 1,
+            "id_produto_servico": 1,
+            "des_ajuste_produto": "Descricao primeiro produto",
+            "val_preco_servico": "100.01",
+            "val_desconto_servico": "1.50",
+            "ind_status": "pendente",
+            "created_at": "2026-11-11T18:04:41.000Z",
+            "updated_at": "2026-11-11T18:04:41.000Z",
+            "deleted_at": null,
+            "num_sku": "BOOD109PPB",
+            "nom_produto": "Cintura alta com colchetes",
+            "des_tipo_ajuste": "Ajuste pc grande 3º"
+        },
+        {
+            "id": 2,
+            "id_agendamento": 20,
+            "id_tipo_agendamento": 2,
+            "id_produto_grade": 1,
+            "id_produto_servico": 1,
+            "des_ajuste_produto": "Descricao primeiro produto",
+            "val_preco_servico": "100.01",
+            "val_desconto_servico": "1.50",
+            "ind_status": "pendente",
+            "created_at": "2026-11-12T03:55:42.000Z",
+            "updated_at": "2026-11-12T03:55:42.000Z",
+            "deleted_at": null,
+            "num_sku": "BOOD109PPB",
+            "nom_produto": "Cintura alta com colchetes",
+            "des_tipo_ajuste": "Ajuste pc grande 3º"
+        }]
+    }
+    ```
+  * Buscar Agendamento Item: 
+    * **Método HTTP**: GET
+    * **URL**: /api/agendamentos/20/itens/1
+    * **Campos**: id, id_agendamento, id_tipo_agendamento, id_produto_grade, id_produto_servico, des_ajuste_produto, val_preco_servico, val_desconto_servico, ind_status, created_at, updated_at, deleted_at
+    * **Autenticação**: já existe httpClient com token via cookie
+    * **Chaves**: agendamentoItemKeys
+    * **Validação**: schema com os mesmos campos
+    * **Estrutura de dados (resposta)**:
+    ```json
+    {
+        "sucesso": true,
+        "dados": {
+            "id": 1,
+            "id_agendamento": 20,
+            "id_tipo_agendamento": 2,
+            "id_produto_grade": 1,
+            "id_produto_servico": 1,
+            "des_ajuste_produto": "Teste",
+            "val_preco_servico": "100.01",
+            "val_desconto_servico": "1.50",
+            "ind_status": "pendente",
+            "created_at": "2026-11-11T18:04:41.000Z",
+            "updated_at": "2026-11-12T04:12:57.000Z",
+            "deleted_at": null,
+            "num_sku": "BOOD109PPB",
+            "nom_produto": "Cintura alta com colchetes",
+            "des_tipo_ajuste": "Ajuste pc grande 3º"
+        }
+    }
+    ```
+  * Atualizar Agendamento Item:
+    * **Método HTTP**: PATCH
+    * **URL**: /api/agendamentos/{id}/itens/{id}
+    * **Campos**: id, id_agendamento, id_tipo_agendamento, id_produto_grade, id_produto_servico, des_ajuste_produto, val_preco_servico, val_desconto_servico, ind_status, created_at, updated_at, deleted_at
+    * **Autenticação**: já existe httpClient com token via cookie
+    * **Chaves**: agendamentoItemKeys
+    * **Validação**: schema com os mesmos campos
+    * **Estrutura de dados (enviado)**:
+    ```json
+    {
+        "des_ajuste_produto" : "Teste"
+    }
+    ```
+    * **Estrutura de dados (resposta)**:
+    ```json
+    {
+        "sucesso": true,
+        "mensagem": "Item atualizado",
+        "dados": {
+            "id": 1,
+            "id_agendamento": 20,
+            "id_tipo_agendamento": 2,
+            "id_produto_grade": 1,
+            "id_produto_servico": 1,
+            "des_ajuste_produto": "Teste",
+            "val_preco_servico": "100.01",
+            "val_desconto_servico": "1.50",
+            "ind_status": "pendente",
+            "created_at": "2026-11-11T18:04:41.000Z",
+            "updated_at": "2026-11-12T04:12:57.000Z",
+            "deleted_at": null,
+            "num_sku": "BOOD109PPB",
+            "nom_produto": "Cintura alta com colchetes",
+            "des_tipo_ajuste": "Ajuste pc grande 3º"
+        }
+    }
+    ```
+  * Deletar Agendamento Item
+    * **Método HTTP**: DELETE
+    * **URL**: /api/agendamentos/20/itens/2
+    * **Chaves**: agendamentoKeys
+    * **Estrutura de dados (resposta)**:
+    ```json
+    {
+        "sucesso": true,
+        "mensagem": "Item removido"
+    }
+    ```
 
+* **Endpoints da API AGENDAMENTO ITEM FOTO**:
+  * Criar Agendamento Item Foto
+    * **Método HTTP**: POST
+    * **URL**: /api/agendamentos/
+    * **Campos**: id, id_produto_agendamento, des_caminho_arquivo, nom_original, num_tamanho_bytes, ind_tipo_foto, created_at, updated_at, deleted_at
+    * **Autenticação**: já existe httpClient com token via cookie
+    * **Chaves**: agendamentoItemFotoKeys
+    * **Validação**: schema com os mesmos campos
+    * **Estrutura de dados (enviado)**:
+      | Chave(Key) | Tipo(Type) | Valor/Descrição(value) |
+      | :--- | :---: | ---: |
+      | ind_tipo_foto | string | 'antes' |      
+    * **Estrutura de dados (resposta)**:
+    ```json
+    {
+        "sucesso": true,
+        "mensagem": "Registro criado com sucesso",
+        "dados": {
+            "ids": [
+                1
+            ],
+            "total": 1
+        }
+    }
+    ```
+  * Listar Agendamento Item Foto:
+    * **Método HTTP**: GET
+    * **URL**: /api/agendamentos/20/itens/2/fotos
+    * **Campos**: id, id_produto_agendamento, des_caminho_arquivo, nom_original, num_tamanho_bytes, ind_tipo_foto, created_at, updated_at, deleted_at
+    * **Autenticação**: já existe httpClient com token via cookie
+    * **Chaves**: agendamentoItemFotoKeys
+    * **Validação**: schema com os mesmos campos
+    * **Estrutura de dados (resposta)**:
+    ```json
+    {
+        "sucesso": true,
+        "total": 3,
+        "dados": [
+            {
+                "id": 1,
+                "id_produto_agendamento": 2,
+                "des_caminho_arquivo": "ajustes/ajuste-20-2-A-1794459569234-6412df.png",
+                "nom_original": "Bermuda_-_Cintura_Alta_com_Colchetes.png",
+                "num_tamanho_bytes": 73110,
+                "ind_tipo_foto": "antes",
+                "created_at": "2026-11-12T04:59:29.000Z",
+                "url_arquivo": "/api/agendamentos/fotos/1/arquivo"
+            },
+            {
+                "id": 2,
+                "id_produto_agendamento": 2,
+                "des_caminho_arquivo": "ajustes/ajuste-20-2-A-1794460689922-7e7e81.png",
+                "nom_original": "Bermuda_-_Cintura_Alta_com_Colchetes.png",
+                "num_tamanho_bytes": 73110,
+                "ind_tipo_foto": "antes",
+                "created_at": "2026-11-12T05:18:09.000Z",
+                "url_arquivo": "/api/agendamentos/fotos/2/arquivo"
+            },
+            {
+                "id": 3,
+                "id_produto_agendamento": 2,
+                "des_caminho_arquivo": "ajustes/ajuste-20-2-A-1794460850081-cebf0b.png",
+                "nom_original": "Bermuda_-_Cintura_Alta_com_Colchetes.png",
+                "num_tamanho_bytes": 73110,
+                "ind_tipo_foto": "antes",
+                "created_at": "2026-11-12T05:23:22.000Z",
+                "url_arquivo": "/api/agendamentos/fotos/3/arquivo"
+            }
+        ]
+    }
+    ```
+  * Buscar Agendamento ID Item Foto: 
+    * **Método HTTP**: GET
+    * **URL**: /api/agendamentos/fotos/1
+    * **Campos**: id, id_produto_agendamento, des_caminho_arquivo, nom_original, num_tamanho_bytes, ind_tipo_foto, created_at, updated_at, deleted_at
+    * **Autenticação**: já existe httpClient com token via cookie
+    * **Chaves**: agendamentoItemFotoKeys
+    * **Validação**: schema com os mesmos campos
+    * **Estrutura de dados (resposta)**:
+        ```json
+        {
+            "sucesso": true,
+            "dados": {
+                "id": 1,
+                "id_produto_agendamento": 2,
+                "des_caminho_arquivo": "ajustes/ajuste-20-2-A-1794459569234-6412df.png",
+                "nom_original": "Bermuda_-_Cintura_Alta_com_Colchetes.png",
+                "num_tamanho_bytes": 73110,
+                "ind_tipo_foto": "antes",
+                "created_at": "2026-11-12T04:59:29.000Z",
+                "url_arquivo": "/api/agendamentos/fotos/1/arquivo"
+            }
+        }
+        ```
+  * Baixar Arquivo Agendamento Item Foto: 
+    * **Método HTTP**: GET
+    * **URL**: /api/agendamentos/fotos/1/arquivo
+    * **Campos**: id, id_produto_agendamento, des_caminho_arquivo, nom_original, num_tamanho_bytes, ind_tipo_foto, created_at, updated_at, deleted_at
+    * **Autenticação**: já existe httpClient com token via cookie
+    * **Chaves**: agendamentoItemFotoKeys
+    * **Validação**: schema com os mesmos campos
+    * **Estrutura de dados (resposta)**: Retorna a imagem
+  * Deletar Agendamento Item
+    * **Método HTTP**: DELETE
+    * **URL**: /api/agendamentos/fotos/2
+    * **Chaves**: agendamentoItemFotoKeys
+    * **Estrutura de dados (resposta)**:
+    ```json
+    {
+        "sucesso": true,
+        "mensagem": "Registro deletado com sucesso"
+    }
+    ```
+    
 formulário tem os seguintes campos no banco de dados: 
 ```sql
 CREATE TABLE tab_agendamento (
@@ -1351,7 +1633,7 @@ export interface TipoAgendamentoDeleteResponse {
 }
 ```
 
-Gere os seguintes arquivos seguindo a mesma estrutura dos arquivos de exemplo que tenho para a feature de "horario":
+Gere os seguintes arquivos seguindo a mesma estrutura dos arquivos de exemplo que tenho para a feature de "Agendamento", "Agendamento Produto" e "Agendamento Produto Foto":
 * api.ts (métodos de requisição)
 * hooks.ts (hooks customizados com useQuery/useMutation)
 * queryKeys.ts (chaves de cache)
@@ -1359,4 +1641,9 @@ Gere os seguintes arquivos seguindo a mesma estrutura dos arquivos de exemplo qu
 * types.ts (interfaces TypeScript)
 Obs.: Mantenha a organização em pastas src/features/produtos/produto/ e utilize o httpClient já existente em src/lib/http/client.ts
 
-Gerar também os arquivo columns.tsx (para tabela) e a page.tsx da tela de listagem, seguindo o padrão dos arquivos anexado exibido na arquitetura de categoria.
+Gerar também os arquivo columns.tsx (para tabela) e a page.tsx da tela de listagem, seguindo o padrão dos arquivos anexado exibido na arquitetura de Produto.
+
+
+_________________________
+
+

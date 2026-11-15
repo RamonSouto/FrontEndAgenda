@@ -1,0 +1,84 @@
+@use 'sass:color';
+@use '../base/common/base-variables' as *;
+
+$fb-container-border-color: $border !default;
+$fb-main-header-border-color: $border-light;
+$fb-main-header-bg-color: $content-bg-color-alt1;
+$fb-main-header-separator-color: $fb-container-border-color;
+$fb-pane-bg-color: $content-bg-color;
+$fb-heading-text-color: $content-text-color;
+$fb-palette-item-border-color: $border-light;
+$fb-palette-icon-color: $icon-color;
+$fb-palette-item-text-color: $content-text-color-alt1;
+$fb-pane-button-bg-color: $content-bg-color-alt1;
+$fb-pane-button-border-color: $secondary-border-color;
+$fb-expand-btn-height: 32px;
+$fb-expand-btn-width: 32px;
+$fb-expand-right-padding: 6.45px 8px;
+$fb-expand-left-padding: 6.45px 8px;
+
+$fb-color-background: $content-bg-color !default;
+$fb-color-line-color: $border !default;
+$fb-drop-zone-border-color: $icon-color-disabled !default;
+$fb-color-surface: $content-bg-color !default;
+$fb-color-on-surface: $content-text-color-alt1 !default;
+$fb-color-on-surface-variant: $content-bg-color-alt5 !default;
+$fb-anchor-highlight-color: $primary-bg-color;
+$fb-color-scrim: $black !default;
+
+$fb-repeat-icon-color: $fb-palette-icon-color;
+
+$fb-topbar-height: 3.1rem !default;
+$fb-sidebar-width: 18rem !default;
+$fb-footer-height: 57px !default;
+$fb-ridesidebar-width: 18rem !default;
+$fb-form-width: 500px !default;
+$fb-menu-margin: -3px !default;
+
+$fb-nav-weight: 500;
+$fb-nav-active-weight: 500;
+$fb-palette-label-weight: 500;
+$fb-context-menu-item-border-width: 1px;
+
+$fb-spacing: 1rem !default;
+$fb-spacing-sm: .5rem !default;
+$fb-spacing-lg: 1.5rem !default;
+
+$fb-font-family: $font-family !default;
+$fb-font-size: $text-sm !default;
+$fb-font-size-sm: $text-xs !default;
+$fb-font-size-xs: $text-xxs !default;
+$fb-font-size-lg: $text-base !default;
+$fb-letter-spacing: .00714286em !default;
+$fb-border-radius: .25rem !default;
+
+$fb-dragover-border-color: $primary-darker !default;
+$fb-dragover-background-color: $primary-lighter !default;
+$fb-jsonview-header-color: $content-bg-color-alt2 !default;
+$fb-jsonview-border-color: $icon-color-disabled !default;
+$fb-jsonview-text-color: $content-text-color !default;
+$fb-jsonview-background-color: $fb-color-surface;
+$fb-hint-text-color: $content-text-color-alt3 !default;
+$fb-dashboard-heading-color: $content-text-color-alt1 !default;
+$fb-dashboard-subtitle-color: $content-text-color-alt2 !default;
+$fb-json-input-shadow-color: $primary-bg-color !default;
+$fb-shadow-md: none !default;
+$fb-toolbar-active-bg-color: $primary-bg-color !default;
+$fb-toolbar-active-border-color: $primary-border-color !default;
+$fb-toolbar-content-color: $primary-text-color !default;
+$fb-jsonview-border-color: $primary !default;
+$fb-menu-color: $secondary-bg-color-hover !default;
+$fb-field-label-error-color: $danger !default;
+$fb-bg-surface-color: $fb-color-line-color;
+$fb-right-pane-bg-color: $fb-color-background;
+$fb-action-buttons-bg-color: $fb-color-surface;
+$fb-toolbox-icons-hover-color: $fb-anchor-highlight-color;
+$fb-main-header-height: 48px;
+$fb-main-header-height-bigger: 56px;
+$fb-mode-button-height: 32px;
+$fb-mode-button-height-bigger: 40px;
+$fb-bottom-toolbar-box-shadow: $shadow-lg;
+$fb-right-pane-close-btn-color: $icon-color;
+$fb-left-pane-header-border-width: 1px;
+$fb-reset-btn-height: 32px;
+$fb-reset-btn-height-bigger: 40px;

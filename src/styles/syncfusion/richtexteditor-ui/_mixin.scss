@@ -1,0 +1,45 @@
+@use 'variables' as *;
+
+.e-richtexteditor-ui {
+  .e-rte-ui-toolbar .e-toolbar-item {
+    .e-rte-ui-dropdown-btn {
+      &:hover,
+      &:focus,
+      &:active,
+      &.e-active {
+        @if $theme-name =='FluentUI' or $theme-name =='fluentui-dark' or $theme-name =='bootstrap' or $theme-name =='fluent2' or $theme-name =='fluent2-dark' {
+          border-color: transparent;
+        }
+
+        @if $theme-name =='Material3' or $theme-name =='Material3-dark' {
+          background: $rte-ui-split-btn-span-hover-bg;
+        }
+
+        @if $theme-name =='FluentUI' or $theme-name =='fluentui-dark' or $theme-name =='tailwind' or $theme-name =='tailwind-dark' {
+          background: $rte-ui-split-btn-hover-bg;
+        }
+      }
+
+      &:focus-visible {
+        @if $theme-name =='fabric' or $theme-name =='fabric-dark' {
+          outline: none;
+        }
+      }
+    }
+  }
+
+  @if $skin-name =='material-dark' or $skin-name =='fabric' or $skin-name =='fabric-dark' or $skin-name =='bootstrap' or $skin-name =='bootstrap-dark' or $skin-name =='bootstrap4' {
+    .e-toolbar,
+    .e-toolbar .e-toolbar-pop {
+      border: $rte-ui-toolbar-pop-border;
+    }
+  }
+
+  @if $skin-name =='fluent2' {
+    .e-richtexteditor-ui {
+      .e-toolbar .e-hor-nav {
+        min-height: 40px;
+      }
+    }
+  }
+}
