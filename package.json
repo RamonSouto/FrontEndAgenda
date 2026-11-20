@@ -11,6 +11,7 @@
   "dependencies": {
     "@base-ui/react": "^1.6.0",
     "@hookform/resolvers": "^5.7.1",
+    "@react-pdf/renderer": "^4.9.0",
     "@syncfusion/ej2-base": "^35.1.37",
     "@syncfusion/ej2-react-schedule": "^35.1.46",
     "@syncfusion/ej2-tailwind3-theme": "^35.1.43",
@@ -21,6 +22,7 @@
     "class-variance-authority": "^0.7.1",
     "cldr-data": "^36.0.5",
     "clsx": "^2.1.1",
+    "cn": "^0.5.2",
     "date-fns": "^4.4.0",
     "lucide-react": "^1.24.0",
     "next": "16.2.10",

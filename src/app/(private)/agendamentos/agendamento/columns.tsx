@@ -16,6 +16,7 @@ import {
     AgendamentoResumo,
     AgendamentoStatus,
 } from '@/features/agendamentos/agendamento/types';
+import { formatarData } from '@/lib/utils/formatters';
 
 export const STATUS_LABEL: Record<AgendamentoStatus, string> = {
     agendado: 'Agendado',
@@ -45,7 +46,7 @@ export const formatarDataHoraLocal = (iso: string) =>
         year: 'numeric',
         hour: '2-digit',
         minute: '2-digit',
-    });
+    }).replace(',', '');
 
 export interface AgendamentoTableMeta {
     onView?: (a: AgendamentoResumo) => void;
@@ -76,7 +77,7 @@ export const columns: ColumnDef<AgendamentoResumo>[] = [
         accessorKey: 'dta_agendamento',
         header: ({ column }) => <SortableHeader label="Data/Hora" column={column} />,
         meta: { label: 'Data/Hora' },
-        cell: ({ row }) => formatarDataHoraLocal(row.original.dta_agendamento),
+        cell: ({ row }) => formatarDataHoraLocal(row.original.dta_agendamento), //formatarData(row.original.dta_agendamento),
     },
     {
         accessorKey: 'nom_paciente',

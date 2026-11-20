@@ -46,7 +46,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import { DataTablePagination } from '@/components/ui/data-table-pagination';
 
 import { columns, STATUS_LABEL, formatarDataHoraLocal, AgendamentoTableMeta } from './columns';
-import { AgendamentoForm } from './agendamento-form';
+import { AgendamentoForm } from './[id]/agendamento-form';
 import type { CostureiraRecurso } from './agenda-scheduler';
 
 import {
@@ -66,6 +66,7 @@ import {
 } from '@/features/agendamentos/agendamento/types';
 import { usePessoasPorPapel } from '@/features/pessoas/hooks';
 import { ApiError } from '@/lib/http/errors';
+import { toast } from 'sonner';
 
 // Syncfusion só no cliente: ssr:false evita acesso a window/document no servidor
 const AgendaScheduler = dynamic(
@@ -86,6 +87,7 @@ const DEFAULT_FORM: AgendamentoInput = {
     id_paciente: 0,
     id_costureira: 0,
     id_secretaria: null,
+    id_medico: null,
     dta_agendamento: '',
     des_observacoes_geral: '',
     des_observacoes_costureira: '',
@@ -131,6 +133,7 @@ export default function AgendamentoPage() {
 
     const { data: costureirasRaw } = usePessoasPorPapel('costureira');
     const { data: pacientesRaw } = usePessoasPorPapel('paciente');
+    const { data: medicosRaw } = usePessoasPorPapel('medico');
     const { data: detalhe } = useAgendamento(idVisualizar ?? 0);
 
     const costureiras = useMemo(
@@ -147,11 +150,18 @@ export default function AgendamentoPage() {
             ),
         [pacientesRaw]
     );
+    const medicos = useMemo(
+        () =>
+            (Array.isArray(medicosRaw?.dados) ? medicosRaw.dados : []).filter(
+                (p) => p.deleted_at === null && p.ind_status === 'ativo'
+            ),
+        [medicosRaw]
+    );
     const recursos: CostureiraRecurso[] = useMemo(
         () =>
             costureiras.map((c) => ({
                 id: c.id,
-                nome: c.nom_completo,
+                nome: c.nom_nome ?? c.nom_completo,
                 cor: `#${c.val_cor_hex ?? '999999'}`,
             })),
         [costureiras]
@@ -179,6 +189,9 @@ export default function AgendamentoPage() {
                 // Vai para a tela de detalhe, onde ficam os itens e as fotos
                 router.push(`/agendamentos/agendamento/${response.dados.id}`);
             },
+            onError: (e) => {
+                toast.error(e instanceof ApiError ? e.message : 'Não foi possível criar o agendamento');
+            }
         });
     }
 
@@ -397,6 +410,7 @@ export default function AgendamentoPage() {
                         submitting={criarMutation.isPending}
                         opcoesPacientes={pacientes}
                         opcoesCostureiras={costureiras}
+                        opcoesMedicos={medicos}
                     />
                 </DialogContent>
             </Dialog>
@@ -426,6 +440,10 @@ export default function AgendamentoPage() {
                                 <div>
                                     <p className="text-muted-foreground">Costureira</p>
                                     <p className="font-medium">{detalhe.dados.nom_costureira}</p>
+                                </div>
+                                <div>
+                                    <p className="text-muted-foreground">Médico(a)</p>
+                                    <p className="font-medium">{detalhe.dados.nom_medico ?? '-'}</p>
                                 </div>
                                 <div>
                                     <p className="text-muted-foreground">Data/Hora</p>

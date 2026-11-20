@@ -58,3 +58,8 @@ export function useLogout() {
 export function useAlterarSenha() {
     return useMutation({ mutationFn: (payload: AlterarSenhaInput) => authApi.alterarSenha(payload) })
 }
+
+export function useIsAdmin() {
+    const { data } = useAuth();
+    return data?.papel === 'admin';
+}

@@ -15,6 +15,7 @@ import { AgendamentoForm } from './agendamento-form';
 import { ItemForm } from './item-form';
 import { ItemCard, moeda, totalItem } from './item-card';
 import { STATUS_LABEL } from '../columns';
+import { BotaoRelatorioAgendamento } from './botao-relatorio';
 
 import {
     useAgendamento,
@@ -49,6 +50,7 @@ export default function AgendamentoEditPage() {
 
     const { data: costureirasRaw } = usePessoasPorPapel('costureira');
     const { data: pacientesRaw } = usePessoasPorPapel('paciente');
+    const { data: medicosRaw } = usePessoasPorPapel('medico');
 
     const costureiras = useMemo(
         () =>
@@ -63,6 +65,14 @@ export default function AgendamentoEditPage() {
                 (p) => p.deleted_at === null && p.ind_status === 'ativo'
             ),
         [pacientesRaw]
+    );
+
+    const medicos = useMemo(
+        () =>
+            (Array.isArray(medicosRaw?.dados) ? medicosRaw.dados : []).filter(
+                (p) => p.deleted_at === null && p.ind_status === 'ativo'
+            ),
+        [medicosRaw]
     );
 
     const ag = data?.dados;
@@ -92,6 +102,7 @@ export default function AgendamentoEditPage() {
                     id_paciente: ag.id_paciente,
                     id_costureira: ag.id_costureira,
                     id_secretaria: ag.id_secretaria,
+                    id_medico: ag.id_medico,
                     dta_agendamento: dataOriginal,
                     des_observacoes_geral: ag.des_observacoes_geral ?? '',
                     des_observacoes_costureira: ag.des_observacoes_costureira ?? '',
@@ -177,6 +188,7 @@ export default function AgendamentoEditPage() {
                         </p>
                     </div>
                     <Badge variant="secondary">{STATUS_LABEL[ag.ind_status]}</Badge>
+                    <BotaoRelatorioAgendamento agendamento={ag} />
                 </div>
 
                 <div className="min-w-[180px]">
@@ -210,6 +222,7 @@ export default function AgendamentoEditPage() {
                         submitting={atualizar.isPending}
                         opcoesPacientes={pacientes}
                         opcoesCostureiras={costureiras}
+                        opcoesMedicos={medicos}
                     />
                 </CardContent>
             </Card>

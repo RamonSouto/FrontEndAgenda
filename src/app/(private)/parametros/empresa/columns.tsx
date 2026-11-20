@@ -53,7 +53,7 @@ export function getEmpresaColumns({ onView, onEdit, onDelete }: EmpresaColumnsPr
       accessorKey: 'des_url_logo_horizontal',
       header: sortableHeader('Logo'),
       cell: ({ row }) => {
-        const url = row.original.des_url_logo_horizontal
+        const url = row.original.des_url_logo_horizontal;
 
         if (!url) {
           return (
@@ -66,12 +66,12 @@ export function getEmpresaColumns({ onView, onEdit, onDelete }: EmpresaColumnsPr
         return (
           <img
             src={`${BASE_URL}/${url}`}
-            alt="Imagem do produto"
+            alt={`Logo de ${row.original.nom_fantasia}`}
             className="h-12 w-12 rounded object-cover border"
           />
-        )
+        );
       },
-      meta: { label: 'logo' },
+      meta: { label: 'Logo' },
     },
     {
       accessorKey: 'num_cnpj',
@@ -121,10 +121,10 @@ export function getEmpresaColumns({ onView, onEdit, onDelete }: EmpresaColumnsPr
       cell: ({ row }) => formatarData(row.original.created_at),
     },
     {
-      accessorKey: 'updated_at',
+      accessorKey: 'updated_ad',
       header: sortableHeader('Editado'),
       meta: { label: 'Editado' },
-      cell: ({ row }) => (row.original.updated_at ? formatarData(row.original.updated_at) : '-'),
+      cell: ({ row }) => (row.original.updated_ad ? formatarData(row.original.updated_ad) : '-'),
     },
     {
       id: 'acoes',
@@ -133,11 +133,13 @@ export function getEmpresaColumns({ onView, onEdit, onDelete }: EmpresaColumnsPr
       enableHiding: false,
       cell: ({ row }) => (
         <DropdownMenu>
-          <DropdownMenuTrigger render={(
-            <Button variant="ghost" className="h-8 w-8 p-0">
-              <MoreHorizontal className="h-4 w-4" />
-            </Button>
-          )} />
+          <DropdownMenuTrigger
+            render={
+              <Button variant="ghost" className="h-8 w-8 p-0">
+                <MoreHorizontal className="h-4 w-4" />
+              </Button>
+            }
+          />
           <DropdownMenuContent align="end">
             <DropdownMenuItem onClick={() => onView(row.original)}>
               <Eye className="mr-2 h-4 w-4" /> Visualizar
@@ -168,6 +170,6 @@ export const empresaDefaultVisibility: Record<string, boolean> = {
   sgl_estado: false,
   ind_ativo: false,
   created_at: false,
-  updated_at: false,
+  updated_ad: false,
   acoes: true,
 };

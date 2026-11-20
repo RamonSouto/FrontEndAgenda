@@ -29,6 +29,7 @@ export interface Agendamento {
     id_paciente: number;
     id_costureira: number;
     id_secretaria: number | null;
+    id_medico: number | null;
     dta_agendamento: string;
     des_observacoes_geral: string | null;
     des_observacoes_costureira: string | null;
@@ -45,6 +46,7 @@ export interface Agendamento {
     // JOINs
     nom_paciente: string;
     num_celular_paciente: string | null;
+    nom_medico: string | null;
     nom_costureira: string;
     val_cor_costureira: string | null;
     nom_secretaria: string | null;

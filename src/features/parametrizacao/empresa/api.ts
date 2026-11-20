@@ -1,7 +1,16 @@
 // features/parametrizacao/empresa/api.ts
+
 import { httpClient } from '@/lib/http/client';
-import { Empresa, EmpresaListResponse, ParametrizacaoListResponse } from './types';
-import { EmpresaFormValues } from './schema';
+import type {
+    EmpresaListResponse,
+    EmpresaResponse,
+    EmpresaCreateResponse,
+    EmpresaDeleteResponse,
+    ParametrizacaoListResponse,
+} from './types';
+import type { EmpresaFormValues } from './schema';
+
+const BASE_URL = '/api/sistema/empresa';
 
 const CAMPOS_IMAGEM = [
     'des_url_logo_vertical',
@@ -12,72 +21,58 @@ const CAMPOS_IMAGEM = [
 
 const CAMPOS_VIRTUAIS = ['nom_estado'] as const;
 
-function removerCamposVirtuais(payload: Record<string, any>): Record<string, any> {
-    const resultado = { ...payload };
-    CAMPOS_VIRTUAIS.forEach((campo) => delete resultado[campo]);
-    return resultado;
-}
+type Payload = Partial<EmpresaFormValues>;
+type Dados = Record<string, unknown>;
 
-function normalizarCorPrincipal(payload: Record<string, any>): Record<string, any> {
-    const resultado = { ...payload };
-    if (typeof resultado.val_cor_principal === 'string') {
-        resultado.val_cor_principal = resultado.val_cor_principal.replace('#', '');
+function prepararPayload(payload: Payload): Dados {
+    const dados: Dados = { ...payload };
+    CAMPOS_VIRTUAIS.forEach((campo) => delete dados[campo]);
+    if (typeof dados.val_cor_principal === 'string') {
+        dados.val_cor_principal = dados.val_cor_principal.replace('#', '');
     }
-    return resultado;
+    return dados;
 }
 
-function montarFormData(payload: Record<string, any>): FormData {
+const ehImagem = (key: string) => (CAMPOS_IMAGEM as readonly string[]).includes(key);
+
+const possuiNovaImagem = (dados: Dados) => CAMPOS_IMAGEM.some((c) => dados[c] instanceof File);
+
+/** JSON: remove imagens (URL existente ou null não deve ser reenviada). */
+function omitirImagens(dados: Dados): Dados {
+    return Object.fromEntries(Object.entries(dados).filter(([k]) => !ehImagem(k)));
+}
+
+function montarFormData(dados: Dados): FormData {
     const formData = new FormData();
-
-    Object.entries(payload).forEach(([key, value]) => {
+    Object.entries(dados).forEach(([key, value]) => {
         if (value === undefined || value === null || value === '') return;
-
-        if (CAMPOS_IMAGEM.includes(key as any)) {
-            // Só envia se for um File novo. Se for string (url existente), não reenvia.
-            if (value instanceof File) {
-                formData.append(key, value);
-            }
+        if (ehImagem(key)) {
+            if (value instanceof File) formData.append(key, value);
             return;
         }
-
-        if (typeof value === 'boolean') {
-            formData.append(key, value ? '1' : '0');
-            return;
-        }
-
-        formData.append(key, String(value));
+        formData.append(key, String(value)); // booleans => "true"/"false"
     });
-
     return formData;
 }
 
-function possuiNovaImagem(payload: Record<string, any>): boolean {
-    return CAMPOS_IMAGEM.some((campo) => payload[campo] instanceof File);
+function montarBody(payload: Payload): Dados | FormData {
+    const dados = prepararPayload(payload);
+    return possuiNovaImagem(dados) ? montarFormData(dados) : omitirImagens(dados);
 }
 
 export const empresaApi = {
-    listar: () => httpClient.get<EmpresaListResponse>('/api/sistema/empresa'),
-    buscarPorId: (id: number) => httpClient.get<{ dados: Empresa }>(`/api/sistema/empresa/${id}`),
-    criar: (payload: EmpresaFormValues) => {
+    listar: () => httpClient.get<EmpresaListResponse>(BASE_URL),
 
-        const dadosLimpos = normalizarCorPrincipal(removerCamposVirtuais(payload));
+    buscarPorId: (id: number) => httpClient.get<EmpresaResponse>(`${BASE_URL}/${id}`),
 
-        if (possuiNovaImagem(dadosLimpos)) {
-            return httpClient.post<Empresa>('/api/sistema/empresa', montarFormData(dadosLimpos));
-        }
+    criar: (payload: EmpresaFormValues) =>
+        httpClient.post<EmpresaCreateResponse>(BASE_URL, montarBody(payload)),
 
-        return httpClient.post<Empresa>('/api/sistema/empresa', dadosLimpos);
-    },
-    atualizar: (id: number, payload: Partial<EmpresaFormValues>) => {
+    atualizar: (id: number, payload: Payload) =>
+        httpClient.put<EmpresaResponse>(`${BASE_URL}/${id}`, montarBody(payload)),
 
-        const dadosLimpos = normalizarCorPrincipal(removerCamposVirtuais(payload));
+    deletar: (id: number) => httpClient.delete<EmpresaDeleteResponse>(`${BASE_URL}/${id}`),
 
-        if (possuiNovaImagem(dadosLimpos)) {
-            return httpClient.put<Empresa>(`/api/sistema/empresa/${id}`, montarFormData(payload));
-        }
-
-        return httpClient.put<Empresa>(`/api/sistema/empresa/${id}`, dadosLimpos);
-    },
-    deletar: (id: number) => httpClient.delete(`/api/sistema/empresa/${id}`),
-    listarHorarios: (idEmpresa: number) => httpClient.get<ParametrizacaoListResponse>(`/api/sistema/parametrizacao`),
+    listarHorarios: (_idEmpresa: number) =>
+        httpClient.get<ParametrizacaoListResponse>('/api/sistema/parametrizacao'),
 };

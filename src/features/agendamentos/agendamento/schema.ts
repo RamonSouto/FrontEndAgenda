@@ -32,6 +32,7 @@ const agendamentoBase = z.object({
         .int()
         .positive('Selecione a costureira'),
     id_secretaria: z.number().int().positive().nullable().optional(),
+    id_medico: z.number().int().positive().nullable().optional(),
     dta_agendamento: dataHora(),
     des_observacoes_geral: z.string().nullable().optional(),
     des_observacoes_costureira: z.string().nullable().optional(),

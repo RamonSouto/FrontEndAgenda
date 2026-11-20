@@ -7,7 +7,7 @@ export interface Horario {
     des_tipo_dia: TipoDia;
     hra_inicio: string;
     hra_fim: string;
-    qtd_minutos_intervalo: string;
+    qtd_minutos_intervalo: number;
     ind_ativo: number;
     created_at: string;
     updated_at: string | null;
@@ -16,7 +16,7 @@ export interface Horario {
 
 export interface HorarioListResponse {
     sucesso: boolean;
-    mensagem?: number;
+    parametro?: number;
     dados: Horario[];
 }
 

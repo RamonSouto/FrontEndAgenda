@@ -50,8 +50,11 @@ import { DropdownMenu, DropdownMenuCheckboxItem, DropdownMenuContent, DropdownMe
 import { Empresa } from '@/features/parametrizacao/empresa/types';
 import { useCidades } from '@/features/parametrizacao/cidades/hooks';
 import { useEstados } from '@/features/parametrizacao/estados/hooks';
+import { useIsAdmin } from '@/features/auth/hooks';
 
 export default function EmpresaPage() {
+    const isAdmin = useIsAdmin();
+    console.log(isAdmin);
     const { data: empresasRaw, isLoading, error } = useEmpresas();
     const { data: cidadesRaw } = useCidades();
     const { data: estadosRaw } = useEstados();
@@ -295,6 +298,7 @@ export default function EmpresaPage() {
                 open={formOpen}
                 mode={formMode}
                 empresa={selectedEmpresa}
+                isAdmin={isAdmin}
                 onOpenChange={setFormOpen}
             />
 
