@@ -66,6 +66,8 @@ const data = {
             items: [
                 { title: "Empresa", icon: Building2, url: "/parametros/empresa" },
                 { title: "Horário", icon: Clock, url: "/parametros/horario" },
+                { title: "Templates", icon: Clock, url: "/parametros/template" },
+                { title: "Caixa Saída", icon: Clock, url: "/parametros/outboxemail" },
                 { title: "Cidade", icon: MapPin, url: "/parametros/cidades" },
                 { title: "Estado", icon: Flag, url: "/parametros/estados" },
                 { title: "Log", icon: FileText, url: "/parametros/log" }

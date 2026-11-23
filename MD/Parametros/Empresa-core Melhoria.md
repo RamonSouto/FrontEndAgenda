@@ -1902,3 +1902,20 @@ export default function EmpresaPage() {
     );
 }
 ```
+
+Gere os seguintes arquivos seguindo a mesma estrutura dos arquivos de exemplo que tenho para a feature de "smtp":
+api.ts (métodos de requisição)
+hooks.ts (hooks customizados com useQuery/useMutation)
+queryKeys.ts (chaves de cache)
+schema.ts (validação Zod)
+types.ts (interfaces TypeScript)
+Obs.: Mantenha a organização em pastas src/features/[Empresa]/ e utilize o httpClient já existente em src/lib/http/client.ts
+
+Pontos de atenção:
+
+Salve separado: um erro de SMTP não deve bloquear a alteração dos dados cadastrais, e vice-versa.
+Carregue a aba SMTP só quando ela for aberta. Assim, quem só edita os dados cadastrais não faz a chamada extra.
+Senha: deixe o campo vazio e mostre um aviso como "Senha já configurada" quando ind_senha_configurada for true. Envie des_smtp_senha somente se o usuário digitar uma nova.
+Botão "Enviar e-mail de teste" na aba SMTP, chamando POST /api/sistema/empresa/:idEmpresa/smtp/teste. Se houver alterações não salvas, peça para salvar antes, porque o teste usa o que está gravado.
+Alterações não salvas: avise ao trocar de aba ou sair da tela.
+Visibilidade: mostre a aba SMTP apenas para administradores. O backend já bloqueia os demais, mas esconder a aba evita um 403 confuso.
